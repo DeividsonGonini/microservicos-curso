@@ -13,7 +13,7 @@ import com.devsuperior.hrpayroll.entities.Worker;
 /*
  * name é o nome do projeto
  */
-@FeignClient(name = "wr-worker", url = "localhost:8001", path = "/workers")
+@FeignClient(name = "hr-worker", path = "/workers")
 public interface WorkerFeignClient {
 	
 	@GetMapping(value="/{id}")
