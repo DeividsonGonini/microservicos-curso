@@ -23,10 +23,10 @@ public class HrConfigServerApplication implements CommandLineRunner {
 	}
 
 	//imprime o valor capturado pela variavel de ambiente
-/*	@Override
+	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("USERNAME = " + username);
-		System.out.println("USERPASS = " + userpass);
+		//System.out.println("USERNAME = " + username);
+		//System.out.println("USERPASS = " + userpass);
 	}
-*/
+
 }
