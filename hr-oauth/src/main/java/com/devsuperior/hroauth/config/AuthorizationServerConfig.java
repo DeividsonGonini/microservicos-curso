@@ -1,6 +1,7 @@
 package com.devsuperior.hroauth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +18,12 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
 
+	@Value("${oauth.client.name}")
+	private String clientName;
+	
+	@Value ("${oauth.client.secret}")
+	private String clientSecret;
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
@@ -37,8 +44,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-		.withClient("myappname123") //nome da api
-		.secret(passwordEncoder.encode("myappsecret123")) //senha da api
+		.withClient(clientName) //nome da api
+		.secret(passwordEncoder.encode(clientSecret)) //senha da api
 		.scopes("read", "write") //permite leitura e gravação
 		.authorizedGrantTypes("password")//define o tipo do Grant Type
 		.accessTokenValiditySeconds(86400); //tempo de expiração do token (24h)
