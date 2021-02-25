@@ -5,7 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
@@ -24,11 +23,7 @@ public class WorkerResource {
 	
 	private static Logger logger = LoggerFactory.getLogger(WorkerResource.class);
 	
-	//captura a variavel que esta no config de teste do git
-	@Value("${test.config}")
-	private String testConfig;
-	
-	
+
 	@Autowired
 	private Environment env;
 	
@@ -40,7 +35,7 @@ public class WorkerResource {
 	//EndPoint para testar as configurações no ConfigServer
 	@GetMapping(value="/configs")
 	public ResponseEntity<Void> getConfig(){
-		logger.info("Config = " + testConfig);
+		//logger.info("Config = " + testConfig);
 		return ResponseEntity.noContent().build();
 			}
 	
@@ -53,7 +48,7 @@ public class WorkerResource {
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Worker> findById(@PathVariable Long id){
 		
-	//* Teste timeout para o Hystrix
+	/* Teste timeout para o Hystrix
 		try {
 			Thread.sleep(3000L);
 		} catch (InterruptedException e) {
@@ -61,7 +56,7 @@ public class WorkerResource {
 			e.printStackTrace();
 		}
 		
-		//*/
+		*/
 		logger.info("Port = " + env.getProperty("local.server.port"));
 		
 		Worker obj = repository.findById(id).get();
